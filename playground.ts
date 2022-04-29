@@ -1,37 +1,89 @@
-// interface Person {
-// 	name: string;
-// 	age: number;
-// }
-
-class Person {
-	name: string;
-	age: number;
-
-	constructor(name: string, age: number) {
-		this.name = name;
-		this.age = age;
-	}
+interface Person {
+    kind: "business" | "academic" | "otherType";
+    name: string;
+    age: number;
 }
 
-// interface PersonLoggerFn {
-// 	(person: Person): string;
-// }
+interface BusinessPerson extends Person {
+    kind: "business";
+    salary: number;
+}
 
-type PersonLoggerFn = (person: Person) => string;
+interface AcademicPerson extends Person {
+    kind: "academic";
+    publications: string[];
+}
+
+type Human = BusinessPerson | AcademicPerson;
+
+type RaceCar = {
+    name: string;
+    // maxSpeed has to be 200.
+    maxSpeed: 200;
+    team: string;
+};
+
+type CityCar = {
+    name: string;
+    space: string;
+    maxSpeed: 100;
+};
+
+type Car = RaceCar | CityCar;
 
 export default function play() {
-	const person: Person = {
-		name: "Alex",
-		age: 31,
-	};
+    const car: RaceCar = {
+        name: "Jesus",
+        maxSpeed: 200,
+        team: "God",
+    };
 
-	const logPersonInfo: PersonLoggerFn = (person: Person): string => {
-		const info = `Name: ${person.name}, Age: ${person.age}`;
-		console.log(info);
-		return info;
-	};
-
-	const log: string = logPersonInfo(person);
-
-	const log2: string = logPersonInfo(new Person("Edward", 20));
+    function logPersonInfor(human: Human) {
+        if (human.kind === "academic") {
+            console.log(human);
+        } else if (human.kind === "business") {
+            console.log(human);
+        } else {
+            console.log(human);
+        }
+    }
+    function logCarInfo(car: Car) {
+        switch (car.maxSpeed) {
+            case 200:
+                console.log(car.team);
+                break;
+            case 100:
+                console.log(car.space);
+                break;
+            default:
+                console.log(car);
+        }
+    }
+    // const car: RaceCar = {
+    //     name: "Cool",
+    //     type: "Honda",
+    //     speed: 60,
+    //     mileage: 10,
+    // };
+    // const person: AcademicPerson = {
+    //     name: "alex",
+    //     age: 32,
+    //     publications: [],
+    // };
+    // const person2: BusinessPerson = {
+    //     name: "alex",
+    //     age: 32,
+    //     salary: 69000,
+    // };
+    // function logPerson(person: Person) {}
+    // logPerson(person2);
+    // const names: string[] = ["alex", "matty"];
+    // const numbers: Array<number> = [1, 2, 3, 4, 5, 6];
+    // const random = Math.random() > 0.5 ? "Hello" : [1, 2];
+    // if (typeof random === "string") {
+    //     const upper = random.toUpperCase();
+    // } else {
+    //     console.log(random);
+    // }
+    // console.log(random);
 }
